@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Configuratore preliminare per cupole geodetiche GoodKarma." />
+    <title>GoodKarma · Dome Calculator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <p class="eyebrow">GOODKARMA · STRUMENTO PRELIMINARE</p>
+        <h1>Progetta la tua<br />cupola geodetica.</h1>
+        <p class="lead">Una prima distinta geometrica, leggibile in officina. I dati di taglio composto restano esplicitamente da validare.</p>
+      </header>
+
+      <section class="panel configurator" aria-labelledby="config-title">
+        <div class="section-heading">
+          <span class="step">01</span>
+          <div><p class="eyebrow">CONFIGURAZIONE</p><h2 id="config-title">Dati della cupola</h2></div>
+        </div>
+        <form id="dome-form">
+          <label>Diametro esterno
+            <span class="input-row"><input id="diameter" type="number" min="1" max="30" step="0.1" value="5" required /><em>m</em></span>
+          </label>
+          <fieldset>
+            <legend>Frequenza</legend>
+            <div class="segmented">
+              <label><input type="radio" name="frequency" value="2" /><span>F2<br /><small>più semplice</small></span></label>
+              <label><input type="radio" name="frequency" value="3" checked /><span>F3<br /><small>più fine</small></span></label>
+            </div>
+          </fieldset>
+          <div class="wood-grid">
+            <label>Larghezza listello
+              <span class="input-row"><input id="width" type="number" min="10" max="300" step="1" value="50" required /><em>mm</em></span>
+            </label>
+            <label>Spessore listello
+              <span class="input-row"><input id="thickness" type="number" min="10" max="200" step="1" value="30" required /><em>mm</em></span>
+            </label>
+          </div>
+          <fieldset>
+            <legend>Sezione del legno</legend>
+            <div class="segmented two">
+              <label><input type="radio" name="section" value="Rettangolare" checked /><span>Rettangolare</span></label>
+              <label><input type="radio" name="section" value="Trapezoidale" /><span>Trapezoidale</span></label>
+            </div>
+          </fieldset>
+          <button type="submit">Calcola geometria <span>→</span></button>
+        </form>
+      </section>
+
+      <section id="results" class="results" aria-live="polite">
+        <div class="result-head">
+          <div><p class="eyebrow">02 · RISULTATI</p><h2>Quadro geometrico</h2></div>
+          <button id="print" class="quiet" type="button">Stampa / PDF</button>
+        </div>
+        <div id="summary" class="summary"></div>
+        <div class="layout-grid">
+          <article class="panel dome-card">
+            <p class="eyebrow">MODELLO</p>
+            <div class="dome-visual" aria-hidden="true"><div class="arc a"></div><div class="arc b"></div><div class="arc c"></div><div class="base"></div></div>
+            <p id="model-description" class="muted"></p>
+          </article>
+          <article class="panel material-card">
+            <p class="eyebrow">LEGNO GREZZO</p>
+            <dl id="material"></dl>
+          </article>
+        </div>
+        <article class="panel cut-list">
+          <div class="table-heading"><div><p class="eyebrow">DISTINTA PRELIMINARE</p><h3>Famiglie di montanti</h3></div><span class="badge">Lunghezze corda</span></div>
+          <div class="table-scroll"><table><thead><tr><th>Tipo</th><th>Quantità</th><th>Lunghezza teorica</th><th>Con 30 mm margine</th><th>Note</th></tr></thead><tbody id="struts"></tbody></table></div>
+        </article>
+        <article class="notice">
+          <strong>Prima di tagliare tutta la produzione</strong>
+          <p>Le lunghezze qui sono corde tra vertici di una triangolazione di una semisfera. Non includono deduzioni per nodo, spessore reale, gioco, sovrapposizioni o lavorazioni GoodKarma. Angoli diedri, bevel e miter non sono mostrati come valori definitivi: per il GoodKarma richiedono un modello di giunto validato e un primo triangolo/campione fisico.</p>
+        </article>
+        <article class="panel next-steps">
+          <p class="eyebrow">PROSSIMO PASSO</p>
+          <h3>Validazione del sistema di giunzione</h3>
+          <p>Questa versione è adatta a confrontare frequenza, scala e fabbisogno. La fase successiva sarà definire il nodo GoodKarma scelto, modellarlo in 3D e verificare su provino le quote di taglio.</p>
+        </article>
+      </section>
+      <footer>GoodKarma Dome Calculator · v0.1 · Strumento di pianificazione, non progetto strutturale.</footer>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
